@@ -2,7 +2,7 @@ import * as vscode from "vscode";
 import * as crypto from "crypto";
 import axios from "axios";
 // 获取插件的配置项
-const config = vscode.workspace.getConfiguration("translatePlugin");
+const config = vscode.workspace.getConfiguration("langue-taranslate");
 export class BaiduApi {
   static url = "https://fanyi-api.baidu.com/api/trans/vip/translate";
   static appid = config.get<string>("baiduAppId") ?? "";

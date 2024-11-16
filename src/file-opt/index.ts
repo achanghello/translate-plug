@@ -2,17 +2,19 @@ import * as vscode from "vscode";
 import path from "path";
 import * as fs from "fs";
 // 获取插件的配置项
-const config = vscode.workspace.getConfiguration("translatePlugin");
+const config = vscode.workspace.getConfiguration("langue-taranslate");
+const filePathZh = config.get<string>("filePathZh") ?? "";
+const filePathEn = config.get<string>("filePathEn") ?? "";
 export class FileOpt {
   // 指定保存翻译数据的 JSON 文件路径
   static translationFilePathZh = path.join(
     vscode.workspace.rootPath || "",
-    "src/locales/modules/zh_cn.json"
+    filePathZh
   );
   // 指定保存翻译数据的 JSON 文件路径
   static translationFilePathEn = path.join(
     vscode.workspace.rootPath || "",
-    "src/locales/modules/en.json"
+    filePathEn
   );
 
   static fileInTranslation = async (
@@ -39,7 +41,7 @@ export class FileOpt {
     // 保存更新后的翻译记录
     fs.writeFileSync(
       this.translationFilePathZh,
-      JSON.stringify(existingTranslations, null, 4)
+      JSON.stringify(existingTranslations, null, "\t")
     );
   };
 
@@ -59,7 +61,7 @@ export class FileOpt {
     // 保存更新后的翻译记录
     fs.writeFileSync(
       this.translationFilePathEn,
-      JSON.stringify(existingTranslations, null, 4)
+      JSON.stringify(existingTranslations, null, "\t")
     );
   };
 }

@@ -2,70 +2,78 @@
 
 可以翻译选中中文文字的插件，目前为测试版
 
-## Features
+# 使用方式
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+安装完插件，选中要翻译文字右键即可选择使用
 
-For example if there is an image subfolder under your extension project workspace:
+1. 翻译-不改变选中文本
+   直接将翻译添加到词典文件里
 
-\!\[feature X\]\(images/feature-x.png\)
+2. 翻译-template 文本
+   文本形式改变 你好世界 -> {{ $t("你好世界") }}
+   将翻译添加到词典文件里
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+3. 翻译-template 配置项
+   文本形式改变 你好世界 -> $t('你好世界')
+   将翻译添加到词典文件里
 
-## Requirements
+4. 翻译-script 文本
+   文本形式改变 "你好世界" -> i18n.global.t("你好世界")
+   将翻译添加到词典文件里
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+# 关于配置项
 
-## Extension Settings
+点击插件的设置即可进行配置
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+百度翻译 api 的 apikey
+百度翻译 api 的 appid
 
-For example:
+1. 本插件翻译原理为调用百度翻译的 api
+   默认使用的是作者的 apikey 和 appid
+   2022 年 8 月 1 日起，通用翻译 API 标准版免费调用量调整为 5 万字符/月，高级版免费调用量调整为 100 万字符/月
+   个人开发认证后即可使用高级免费版,可在下面网址注册
+   https://api.fanyi.baidu.com/api/trans/product/desktop?req=developer
+   在开发者信息查看 apikey 和 appid
 
-This extension contributes the following settings:
+存放中英词典的路径
+存放中中词典的路径
 
-- `myExtension.enable`: Enable/disable this extension.
-- `myExtension.thing`: Set to `blah` to do something.
+# 关于快捷键的配置
 
-## Known Issues
+插件仅实现了 翻译-不改变选中文本 的快捷键 ctrl+shift+t
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+自定义快捷键方式
 
-## Release Notes
+1. ctrl+shift+p 打开搜索框
+2. 搜索 Preferences: Open Keyboard Shortcuts (JSON)
+3. [
+   // 翻译-不改变选中文本
+   {
+   "key": "ctrl+shift+t", // 你自定义的快捷键
+   "command": "langue-taranslate.noChangeText",
+   "when": "editorTextFocus && editorHasSelection"
+   },
+   // 翻译-template 文本
+   {
+   "key": "ctrl+shift+g", // 你自定义的快捷键
+   "command": "langue-taranslate.templateText",
+   "when": "editorTextFocus && editorHasSelection"
+   },
+   // 翻译-template 配置项
+   {
+   "key": "ctrl+shift+y", // 你自定义的快捷键
+   "command": "langue-taranslate.templateQuoteText",
+   "when": "editorTextFocus && editorHasSelection"
+   },
+   // 翻译-script 文本
+   {
+   "key": "ctrl+shift+i", // 你自定义的快捷键
+   "command": "langue-taranslate.scriptText",
+   "when": "editorTextFocus && editorHasSelection"
+   },
+   ]
 
-Users appreciate release notes as you update your extension.
+# 关于插件的源码
 
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-- [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-- Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-- Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-- Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-- [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-- [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+欢迎你来完善它
+https://github.com/achanghello/translate-plug

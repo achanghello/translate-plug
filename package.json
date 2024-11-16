@@ -1,8 +1,9 @@
 {
   "name": "langue-taranslate",
   "displayName": "langue-taranslate",
+  "publisher": "achang",
   "description": "",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.95.0"
   },
@@ -14,32 +15,76 @@
   "contributes": {
     "commands": [
       {
-        "command": "extension.translateText",
-        "title": "Translate Selected Text"
+        "command": "langue-taranslate.noChangeText",
+        "title": "翻译-不改变选中文本"
+      },
+      {
+        "command": "langue-taranslate.templateText",
+        "title": "翻译-template文本"
+      },
+      {
+        "command": "langue-taranslate.templateQuoteText",
+        "title": "翻译-template配置项"
+      },
+      {
+        "command": "langue-taranslate.scriptText",
+        "title": "翻译-script文本"
       }
     ],
     "menus": {
       "editor/context": [
         {
-          "command": "extension.translateText",
+          "command": "langue-taranslate.noChangeText",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        },
+        {
+          "command": "langue-taranslate.templateText",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        },
+        {
+          "command": "langue-taranslate.templateQuoteText",
+          "when": "editorHasSelection",
+          "group": "navigation"
+        },
+        {
+          "command": "langue-taranslate.scriptText",
           "when": "editorHasSelection",
           "group": "navigation"
         }
       ]
     },
+    "keybindings": [
+      {
+        "command": "langue-taranslate.noChangeText",
+        "key": "ctrl+shift+t",
+        "when": "editorTextFocus && editorHasSelection"
+      }
+    ],
     "configuration": {
       "type": "object",
-      "title": "Translation Plugin Settings",
+      "title": "中英文翻译配置项",
       "properties": {
-        "translatePlugin.baiduAppId": {
+        "langue-taranslate.baiduAppId": {
           "type": "string",
-          "default": "",
-          "description": "The Baidu Translate API App ID"
+          "default": "20241115002202999",
+          "description": "百度翻译api的appid"
         },
-        "translatePlugin.baiduApiKey": {
+        "langue-taranslate.baiduApiKey": {
           "type": "string",
-          "default": "",
-          "description": "The Baidu Translate API Key"
+          "default": "s05ejgQOygc5ypqTufQw",
+          "description": "百度翻译api的apikey"
+        },
+        "langue-taranslate.filePathZh": {
+          "type": "string",
+          "default": "src/locales/modules/zh_cn.json",
+          "description": "存放中中词典的路径"
+        },
+        "langue-taranslate.filePathEn": {
+          "type": "string",
+          "default": "src/locales/modules/en.json",
+          "description": "存放中英词典的路径"
         }
       }
     }
